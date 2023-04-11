@@ -15,6 +15,6 @@ type ID struct {
 type Model struct {
 	CreateBy   string `json:"create_by" gorm:"comment:创建人"`
 	UpdateBy   string `json:"update_by" gorm:"comment:更新人"`
-	CreateTime *Time  `json:"create_time" gorm:"type:datetime(0);autoCreateTime;comment:创建时间"`
-	UpdateTime *Time  `json:"update_time" gorm:"type:datetime(0);autoUpdateTime;comment:更新时间"`
+	CreateTime *Time  `json:"create_time" gorm:"type:timestamp(0) without time zone;autoCreateTime;comment:创建时间"`
+	UpdateTime *Time  `json:"update_time" gorm:"type:timestamp(0) without time zone;autoUpdateTime;comment:更新时间"`
 }
