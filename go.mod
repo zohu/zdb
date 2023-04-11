@@ -25,6 +25,7 @@ require (
 	github.com/leodido/go-urn v1.2.3 // indirect
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible // indirect
 	github.com/lestrrat-go/strftime v1.0.6 // indirect
+	github.com/lib/pq v1.10.7 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect

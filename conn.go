@@ -72,6 +72,7 @@ func (o *Orm) open(database string) (string, gorm.Dialector, error) {
 }
 
 func (o *Orm) exec(dsn, driver, str string) error {
+	zlog.Infof("dsn=%s, driver=%s, 执行SQL: %s", dsn, driver, str)
 	if db, err := sql.Open(driver, dsn); err != nil {
 		return err
 	} else {
@@ -103,7 +104,7 @@ func (o *Orm) sql(kind, database string) string {
 
 func (o *Orm) sync(dsn, kind, database string) error {
 	if err := o.exec(dsn, kind, o.sql(kind, database)); err != nil {
-		return fmt.Errorf("创建数据库失败: %w", err)
+		return fmt.Errorf("创建数据库失败 %w", err)
 	}
 	zlog.Infof("创建数据库: %s", database)
 	return nil
