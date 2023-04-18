@@ -72,7 +72,7 @@ func (o *Orm) open(database string) (string, gorm.Dialector, error) {
 }
 
 func (o *Orm) exec(dsn, driver, str string) error {
-	zlog.Infof("dsn=%s, driver=%s, 执行SQL: %s", dsn, driver, str)
+	zlog.Infof("driver=%s, 执行SQL: %s", driver, str)
 	if db, err := sql.Open(driver, dsn); err != nil {
 		return err
 	} else {
