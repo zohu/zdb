@@ -26,7 +26,7 @@ func Init(c *Config, dst ...interface{}) error {
 }
 
 func DB(ctx context.Context, database string) *gorm.DB {
-	def := zutils.FirstValue(database, conf.DataBase)
+	def := zutils.FirstTruthString(database, conf.DataBase)
 	if v, ok := conn.Load(def); ok {
 		return v.(*Orm).db.WithContext(ctx)
 	}
