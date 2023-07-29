@@ -103,9 +103,9 @@ func (o *Orm) sql(kind, database string) string {
 
 func (o *Orm) sync(dsn, kind, database string) error {
 	if err := o.exec(dsn, kind, o.sql(kind, database)); err != nil {
-		return fmt.Errorf(">>>>> create db failed: %w", err)
+		return fmt.Errorf(">>>>> init db failed: %w", err)
 	}
-	zlog.Infof(">>>>> create db success: %s", database)
+	zlog.Infof(">>>>> init db success: %s", database)
 	return nil
 }
 
