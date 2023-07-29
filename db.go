@@ -25,8 +25,11 @@ func Init(c *Config, dst ...interface{}) error {
 	return nil
 }
 
-func DB(ctx context.Context, database string) *gorm.DB {
-	def := zutils.FirstTruthString(database, conf.DataBase)
+func DB(ctx context.Context, args ...string) *gorm.DB {
+	if len(args) == 0 {
+		args = append(args, "")
+	}
+	def := zutils.FirstTruthString(args[0], conf.DataBase)
 	if v, ok := conn.Load(def); ok {
 		return v.(*Orm).db.WithContext(ctx)
 	}
@@ -37,8 +40,4 @@ func DB(ctx context.Context, database string) *gorm.DB {
 	}
 	conn.Store(def, orm)
 	return orm.db.WithContext(ctx)
-}
-
-func DBE(ctx context.Context, database, e string) *gorm.DB {
-	return DB(ctx, database).Where("e = ?", e)
 }
