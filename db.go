@@ -14,13 +14,13 @@ func Init(c *Config, dst ...interface{}) error {
 	conf = c
 	db := DB(context.Background(), "")
 	if db == nil {
-		return fmt.Errorf("数据库初始化失败")
+		return fmt.Errorf(">>>>> init db failed")
 	}
 	if len(dst) > 0 {
 		if err := db.AutoMigrate(dst...); err != nil {
-			return fmt.Errorf("初始化表失败: %v", err)
+			return fmt.Errorf(">>>>> init db table failed: %v", err)
 		}
-		zlog.Infof("初始化数据表 %d", len(dst))
+		zlog.Infof(">>>>> init db table success: %d", len(dst))
 	}
 	return nil
 }
@@ -35,7 +35,7 @@ func DB(ctx context.Context, args ...string) *gorm.DB {
 	}
 	orm := new(Orm)
 	if err := orm.init(def); err != nil {
-		zlog.Errorf("创建数据库链接失败 %v", err)
+		zlog.Errorf(">>>>> init db conn failed %v", err)
 		return nil
 	}
 	conn.Store(def, orm)
