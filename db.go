@@ -41,11 +41,3 @@ func DB(ctx context.Context, args ...string) *gorm.DB {
 	conn.Store(def, orm)
 	return orm.db.WithContext(ctx)
 }
-
-func DBE(ctx context.Context, acronyms, corpid string, args ...string) *gorm.DB {
-	if acronyms == "" {
-		return DB(ctx, args...).Where("e=?", corpid)
-	} else {
-		return DB(ctx, args...).Where(fmt.Sprintf("%s.e = ?", acronyms), corpid)
-	}
-}
