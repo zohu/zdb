@@ -44,3 +44,11 @@ func (t *Time) Scan(v interface{}) error {
 	}
 	return fmt.Errorf("can not convert %v to timestamp", v)
 }
+
+func (t *Time) GetTime() time.Time {
+	if t == nil {
+		return time.Time{}
+	} else {
+		return t.Time
+	}
+}
