@@ -16,7 +16,7 @@ func Init(c *Config, dst ...interface{}) error {
 	if db == nil {
 		return fmt.Errorf(">>>>> init db failed")
 	}
-	if len(dst) > 0 {
+	if dst != nil && len(dst) > 0 {
 		if err := db.AutoMigrate(dst...); err != nil {
 			return fmt.Errorf(">>>>> init db table failed: %v", err)
 		}
