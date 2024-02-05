@@ -7,7 +7,7 @@ require (
 	github.com/zohu/zlog v0.0.10
 	github.com/zohu/zutils v0.0.14
 	gorm.io/driver/mysql v1.5.2
-	gorm.io/driver/postgres v1.5.5
+	gorm.io/driver/postgres v1.5.4
 	gorm.io/gorm v1.25.6
 )
 
