@@ -32,7 +32,7 @@ func (o *Orm) init(database string) error {
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true, // 关闭复数表名
 		},
-		Logger: zlog.NewLoggerForGorm(&zlog.OptionForGorm{
+		Logger: NewLoggerForGorm(&OptionForGorm{
 			SlowThreshold:             time.Second * time.Duration(conf.SlowThresholdSecond),
 			SkipCallerLookup:          conf.SkipCallerLookup,
 			IgnoreRecordNotFoundError: conf.IgnoreRecordNotFoundError,
