@@ -4,11 +4,11 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"github.com/zohu/zlog"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
+	"log"
 	"sync"
 	"time"
 )
@@ -24,7 +24,7 @@ func (o *Orm) init(database string) error {
 	if err != nil {
 		return err
 	}
-	err = o.sync(uri, conf.Kind, database)
+	err = o.sync(uri, string(conf.Kind), database)
 	if err != nil {
 		return err
 	}
@@ -101,11 +101,11 @@ func (o *Orm) sql(kind, database string) string {
 	}
 }
 
-func (o *Orm) sync(dsn, kind, database string) error {
+func (o *Orm) sync(dsn string, kind string, database string) error {
 	if err := o.exec(dsn, kind, o.sql(kind, database)); err != nil {
-		return fmt.Errorf(">>>>> init db failed: %w", err)
+		return fmt.Errorf("init db failed: %w", err)
 	}
-	zlog.Infof(">>>>> init db success: %s", database)
+	log.Println("init db success: ", database)
 	return nil
 }
 
