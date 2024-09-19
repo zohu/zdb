@@ -39,8 +39,7 @@ github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UV
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=
 github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
-github.com/zohu/zlog v1.0.1 h1:wCh9Jp+jr/ecMWEGeEOgr/hqJ6acIgr4HtDRotY4cqE=
-github.com/zohu/zlog v1.0.1/go.mod h1:WjI9q3e3B3//21zznLvA1OlFiTxw++Y4EnWI5cFDyaI=
+github.com/zohu/zlog v1.0.2 h1:rPcGe1A3N5TAsf3qcEZDs0ve4z3xi/P/SR74lfi7gM0=
 github.com/zohu/zlog v1.0.2/go.mod h1:HSSJlOenHMQvi5HXlSpaSRQHUPza6/gR9Zpvds+x+ZQ=
 go.uber.org/goleak v1.3.0 h1:2K3zAYmnTNqV73imy9J1T3WC+gmCePx2hEGkimedGto=
 go.uber.org/goleak v1.3.0/go.mod h1:CoHD4mav9JJNrW/WLlf7HGZPjdw8EucARQHekz1X6bE=
