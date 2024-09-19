@@ -4,7 +4,7 @@ go 1.22
 
 require (
 	github.com/lib/pq v1.10.9
-	github.com/zohu/zlog v1.0.1
+	github.com/zohu/zlog v1.0.2
 	go.uber.org/zap v1.27.0
 	google.golang.org/protobuf v1.34.2
 	gorm.io/driver/mysql v1.5.7
