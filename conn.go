@@ -41,9 +41,9 @@ func (o *Orm) init(database string) error {
 		return fmt.Errorf("链接数据库失败 %s", err.Error())
 	} else {
 		d, _ := orm.DB()
-		d.SetMaxIdleConns(conf.MaxIdleConns)
-		d.SetMaxOpenConns(conf.MaxOpenConns)
-		d.SetConnMaxLifetime(time.Minute * time.Duration(conf.ConnMaxLifeMinutes))
+		d.SetMaxIdleConns(int(conf.GetMaxIdle()))
+		d.SetMaxOpenConns(int(conf.GetMaxAlive()))
+		d.SetConnMaxLifetime(time.Minute * time.Duration(conf.GetMaxAliveMinutes()))
 		o.db = orm
 	}
 	return nil
@@ -54,8 +54,8 @@ func (o *Orm) open(database string) (string, gorm.Dialector, error) {
 	if err != nil {
 		return "", nil, err
 	}
-	switch conf.Kind {
-	case "mysql":
+	switch conf.GetKind() {
+	case DatabaseType_DATABASE_MYSQL:
 		return uri, mysql.New(mysql.Config{
 			DSN:                       dsn,
 			DefaultStringSize:         256,   // string 类型字段的默认长度
@@ -64,10 +64,10 @@ func (o *Orm) open(database string) (string, gorm.Dialector, error) {
 			DontSupportRenameColumn:   false, // 用 `change` 重命名列，MySQL 8 之前的数据库和 MariaDB 不支持重命名列
 			SkipInitializeWithVersion: true,  // 根据当前 MySQL 版本自动配置
 		}), nil
-	case "postgres":
+	case DatabaseType_DATABASE_POSTGRESQL:
 		return uri, postgres.Open(dsn), nil
 	default:
-		return "", nil, fmt.Errorf("不支持的数据库类型: %s", conf.Kind)
+		return "", nil, fmt.Errorf("不支持的数据库类型: %s", conf.GetKind().String())
 	}
 }
 

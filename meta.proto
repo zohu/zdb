@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package zdb;
+option go_package = "github.com/zohu/zdb";
+
+enum DatabaseType {
+    DATABASE_UNKNOWN = 0;
+    DATABASE_MYSQL = 1;
+    DATABASE_POSTGRESQL = 2;
+}
+
+message Config {
+    // @gotags: yaml:"kind"
+    DatabaseType kind = 1;
+    // @gotags: yaml:"host"
+    string host = 2;
+    // @gotags: yaml:"port"
+    string port = 3;
+    // @gotags: yaml:"username"
+    string username = 4;
+    // @gotags: yaml:"password"
+    string password = 5;
+    // @gotags: yaml:"database"
+    string database = 6;
+    // @gotags: yaml:"config"
+    string config = 7;
+    // @gotags: yaml:"max_idle"
+    int32 max_idle = 8;
+    // @gotags: yaml:"max_open"
+    int32 max_alive = 9;
+    // @gotags: yaml:"max_alive_minutes"
+    int32 max_alive_minutes = 10;
+    // @gotags: yaml:"slow_threshold_second"
+    int32 slow_threshold_second = 11;
+    // @gotags: yaml:"skip_caller_lookup"
+    bool skip_caller_lookup = 12;
+    // @gotags: yaml:"ignore_record_not_found_error"
+    bool ignore_record_not_found_error = 13;
+}

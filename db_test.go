@@ -8,16 +8,16 @@ import (
 
 func TestNewDB(t *testing.T) {
 	if err := Init(&Config{
-		Kind:                      "postgres",
+		Kind:                      DatabaseType_DATABASE_POSTGRESQL,
 		Host:                      "localhost",
 		Port:                      "5432",
-		UserName:                  "postgres",
+		Username:                  "postgres",
 		Password:                  "JCFkQYex4f",
-		DataBase:                  "test_db",
+		Database:                  "test_db",
 		Config:                    "sslmode=disable TimeZone=Asia/Shanghai",
-		MaxIdleConns:              5,
-		MaxOpenConns:              50,
-		ConnMaxLifeMinutes:        60,
+		MaxIdle:                   5,
+		MaxAlive:                  50,
+		MaxAliveMinutes:           60,
 		SlowThresholdSecond:       5,
 		SkipCallerLookup:          true,
 		IgnoreRecordNotFoundError: true,

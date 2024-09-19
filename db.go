@@ -29,7 +29,7 @@ func DB(ctx context.Context, args ...string) *gorm.DB {
 	if len(args) == 0 {
 		args = append(args, "")
 	}
-	def := firstTruthValue(args[0], conf.DataBase)
+	def := firstTruthValue(args[0], conf.GetDatabase())
 	if v, ok := conn.Load(def); ok {
 		return v.(*Orm).db.WithContext(ctx)
 	}
