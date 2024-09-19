@@ -24,7 +24,16 @@ func (o *Orm) init(database string) error {
 	if err != nil {
 		return err
 	}
-	err = o.sync(uri, string(conf.Kind), database)
+	var driver string
+	switch conf.GetKind() {
+	case DatabaseType_DATABASE_MYSQL:
+		driver = "mysql"
+	case DatabaseType_DATABASE_POSTGRESQL:
+		driver = "postgres"
+	default:
+		return fmt.Errorf("不支持的数据库类型: %s", conf.GetKind().String())
+	}
+	err = o.sync(uri, driver, database)
 	if err != nil {
 		return err
 	}
@@ -33,9 +42,9 @@ func (o *Orm) init(database string) error {
 			SingularTable: true, // 关闭复数表名
 		},
 		Logger: NewLoggerForGorm(&OptionForGorm{
-			SlowThreshold:             time.Second * time.Duration(conf.SlowThresholdSecond),
-			SkipCallerLookup:          conf.SkipCallerLookup,
-			IgnoreRecordNotFoundError: conf.IgnoreRecordNotFoundError,
+			SlowThreshold:             time.Second * time.Duration(conf.GetSlowThresholdSecond()),
+			SkipCallerLookup:          conf.GetSkipCallerLookup(),
+			IgnoreRecordNotFoundError: conf.GetIgnoreRecordNotFoundError(),
 		}),
 	}); err != nil {
 		return fmt.Errorf("链接数据库失败 %s", err.Error())
@@ -101,8 +110,8 @@ func (o *Orm) sql(kind, database string) string {
 	}
 }
 
-func (o *Orm) sync(dsn string, kind string, database string) error {
-	if err := o.exec(dsn, kind, o.sql(kind, database)); err != nil {
+func (o *Orm) sync(dsn string, driver string, database string) error {
+	if err := o.exec(dsn, driver, o.sql(driver, database)); err != nil {
 		return fmt.Errorf("init db failed: %w", err)
 	}
 	log.Println("init db success: ", database)
